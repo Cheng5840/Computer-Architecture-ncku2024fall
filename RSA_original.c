@@ -55,26 +55,26 @@ int main()
     return 0;  
 } 
 int my_clz(uint32_t x) {
-    if (x == 0) return 32;  // 特殊情況
+    if (x == 0) return 32;  // special case: all zero
 
     int count = 0;
-    if ((x & 0xFFFF0000) == 0) {  // 檢查前 16 位
+    if ((x & 0xFFFF0000) == 0) {  // check 16 bit starts from msb then shift left 16 bit
         count += 16;
-        x <<= 16;  // 左移16位，檢查後半段
+        x <<= 16;  
     }
-    if ((x & 0xFF000000) == 0) {  // 檢查前 8 位
+    if ((x & 0xFF000000) == 0) {  // check 8 bits starts from msb
         count += 8;
         x <<= 8;
     }
-    if ((x & 0xF0000000) == 0) {  // 檢查前 4 位
+    if ((x & 0xF0000000) == 0) {  // check 4 bit starts from msb
         count += 4;
         x <<= 4;
     }
-    if ((x & 0xC0000000) == 0) {  // 檢查前 2 位
+    if ((x & 0xC0000000) == 0) {  // check 2 bit starts from msb
         count += 2;
         x <<= 2;
     }
-    if ((x & 0x80000000) == 0) {  // 檢查最高位
+    if ((x & 0x80000000) == 0) {  // check msb
         count += 1;
     }
     return count;
